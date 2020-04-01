@@ -26,3 +26,14 @@ class Solution:
             sum -= sum//10**(length2-1) * 10**(length2-1)
             length2 -= 1
         return output
+class Solution:
+    def plusOne(self, digits: List[int]) -> List[int]:
+        if not digits:
+            return []
+        carry = 1
+        output = digits[::-1]
+        for i in range(len(output)):
+            output[i], carry = (output[i] + carry) % 10, (output[i] + carry) // 10
+        if carry > 0:
+            output.append(carry)
+        return output[::-1]

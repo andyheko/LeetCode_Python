@@ -6,6 +6,13 @@
 
 class Solution:
     def middleNode(self, head: ListNode) -> ListNode:
+        l = [head]
+        while l[-1].next:
+            l.append(l[-1].next)
+        return l[len(l) // 2]
+
+class Solution:
+    def middleNode(self, head: ListNode) -> ListNode:
         slow = fast = head
         while fast and fast.next:
             slow = slow.next

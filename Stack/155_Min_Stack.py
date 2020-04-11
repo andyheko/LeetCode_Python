@@ -40,64 +40,46 @@ class MinStack(object):
                 minimum = i
         return minimum
 
+# Solution2:
+#O(1)
+# push a tuple with the first being the number pushed, the second being the minimum value so far
 class MinStack(object):
 
     def __init__(self):
         """
         initialize your data structure here.
         """
-        self.stack = []
-        self.minimum = float('inf')
+        self.items = []
 
     def push(self, x):
         """
         :type x: int
         :rtype: void
         """
-        if not self.stack:
-        	self.stack.append(x)
-        	self.minimum = x
-        else:
-        	if x < self.minimum:
-        		self.stack.append(2*x-self.minimum)
-        		self.minimum = x
-        	else:
-        		self.stack.append(x)
-
-
+        m = x
+        if self.items:
+            m = self.items[-1][1]
+            if x < m:
+                m = x
+        self.items.append((x, m))
 
     def pop(self):
         """
         :rtype: void
         """
-        if self.stack:
-        	top = self.stack.pop()
-        	if top < self.minimum:
-        		self.minimum = 2*self.minimum - top
-
+        self.items.pop()
 
     def top(self):
         """
         :rtype: int
         """
-        if not self.stack:
-        	return None
-        else:
-        	top = self.stack[-1]
-        	if top < self.minimum:
-        		return self.minimum
-        	else:
-        		return top
-
+        return self.items[-1][0]
 
     def getMin(self):
         """
         :rtype: int
         """
-        if self.stack:
-        	return self.minimum
-        else:
-        	return None
+        return self.items[-1][1]
 # Your MinStack object will be instantiated and called as such:
 # obj = MinStack()
 # obj.push(x)

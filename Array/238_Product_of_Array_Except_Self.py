@@ -23,3 +23,26 @@ class Solution(object):
             output[i] = L[i] * R[i]
 
         return output
+
+### Solution 2 : O(1) Space Complexity
+
+class Solution(object):
+    def productExceptSelf(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[int]
+        """
+        length = len(nums)
+        output = [0] * length
+
+
+        output[0] = 1 # output present product of elements to the left of index i
+        for i in range(1, len(nums)):
+            output[i] = output[i-1] * nums[i-1]
+
+        R = 1 # R as variable to contain product of elements to the right of index i
+        for i in reversed(range(length)): # from length-1 to 0
+            output[i] = output[i] * R
+            R *= nums[i] # update R
+
+        return output

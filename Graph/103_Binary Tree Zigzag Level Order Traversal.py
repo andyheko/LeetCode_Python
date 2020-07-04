@@ -32,3 +32,25 @@ class Solution:
                 level_q = deque()
                 order_left = not order_left
         return ans
+
+class Solution:
+    def zigzagLevelOrder(self, root: TreeNode) -> List[List[int]]:
+        if not root:
+            return []
+        ans = [] # [[node.val, .....], [], []...]
+        def dfs(node, level):
+            if level >= len(ans):
+                ans.append(deque([node.val]))
+            else:
+                if level % 2 == 0:
+                    ans[level].append(node.val)
+                else:
+                    ans[level].appendleft(node.val)
+
+            if node.left:
+                dfs(node.left, level + 1)
+            if node.right:
+                dfs(node.right, level + 1)
+
+        dfs(root, 0)
+        return ans

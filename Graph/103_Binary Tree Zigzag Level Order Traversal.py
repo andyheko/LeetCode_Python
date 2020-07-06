@@ -39,12 +39,12 @@ class Solution:
             return []
         ans = [] # [[node.val, .....], [], []...]
         def dfs(node, level):
-            if level >= len(ans):
+            if level >= len(ans): # for the first case in each level
                 ans.append(deque([node.val]))
             else:
-                if level % 2 == 0:
+                if level % 2 == 0: # from left to right, FIFO
                     ans[level].append(node.val)
-                else:
+                else: # from right to left, FILO
                     ans[level].appendleft(node.val)
 
             if node.left:

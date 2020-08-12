@@ -1,3 +1,26 @@
+class Solution:
+    def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
+        wordSet = set(wordList)
+        bfs = collections.deque()
+        bfs.append((beginWord, 1)) # (word, length)
+        combo = defaultdict(list) # ex. [do*][dot, dog]
+        for word in wordList:
+            for i in range(len(word)):
+                combo[word[:i] + '*' + word[i+1:]].append(word)
+
+        while bfs:
+            word, length = bfs.popleft()
+            if word == endWord:
+                return length
+            for i in range(len(word)):
+                    newWord = word[:i] + '*' + word[i+1:]
+                    for c in combo[newWord]: # c is word in wordList
+                        if c in wordSet:
+                            bfs.append((c, length+1))
+                            wordSet.remove(c)
+                    combo[newWord] = []
+        return 0
+
 from collections import defaultdict
 class Solution:
     def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:

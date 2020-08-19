@@ -48,4 +48,27 @@ class Solution(object):
                 if grid[i][j] == '1':
                     dfs(i, j)
                     count += 1
-        return count            
+        return count
+class Solution:
+    def numIslands(self, grid: List[List[str]]) -> int:
+        if not grid:
+            return 0
+        R = len(grid)
+        C = len(grid[0])
+        count = 0
+
+        for r in range(R):
+            for c in range(C):
+                if grid[r][c] == '1':
+                    count += 1
+                    bfs = deque()
+                    bfs.append((r,c))
+                    while bfs:
+                        rr, cc = bfs.popleft()
+                        if 0 <= rr < R and 0 <= cc < C and grid[rr][cc] == '1':
+                            grid[rr][cc] = '0'
+                            bfs.append((rr-1, cc))
+                            bfs.append((rr+1, cc))
+                            bfs.append((rr, cc-1))
+                            bfs.append((rr, cc+1))
+        return count

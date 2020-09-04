@@ -18,34 +18,12 @@ class Solution:
             count += twoSumSmaller(nums, i + 1, target - nums[i])
         return count
 
-def closest(s, arr queries):
-	n = len(s)
-	output = [0] * len(queries)
-	map = {}
-	for i in n:
-		if s[i ]in map:
-			map[s[i]].append(i)
-		else:
-			map[[s[i]] = [i]
-	for j, index in enumerate(queries):
-		if len(map[s[index]]) == 1
-			output[j] = -1
-		else:
-			left, right = 0, len(map[s[index]])-1
-			while left < right:
-				mid = (left + right) // 2
-				if map[s[index]][mid] == index:
-                    if mid == 0:
-                        output[j] = map[s[index]][1]
-                    elif mid == len(map[s[index]]) - 1:
-                        output[j] = map[s[index]][1]
-                    else:
-                        if map[s[index]][mid] - map[s[index]][mid-1] <= map[s[index]][mid+1] - map[s[index]][mid]:
-                            output[j] = map[s[index]][mid-1]
-                        else:
-                            output[j] = map[s[index]][mid+1]
-                elif map[s[index]][mid] > index:
-                    right = mid - 1
-                else:
-                    left = mid + 1
-			output[j] =
+
+def maximumContainer(n, cost, m):
+    count, curr, r = 0, 0, 0
+    curr = n / c
+    count += curr
+    while curr > m:
+        curr, r = (curr + r) / m, (curr + r) % r
+        count += curr
+    print(count)

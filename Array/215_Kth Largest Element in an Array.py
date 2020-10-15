@@ -1,4 +1,26 @@
 class Solution:
+    def findKthLargest(self, nums, k):
+        # [3, 2, 1, 5, 6, 4], 2th larget
+        # choose the right-most element as pivot
+        def partition(nums, l, r):
+            low = l
+            for i in range(l, r):
+                if nums[i] < nums[r]:
+                    nums[i], nums[low] = nums[low], nums[i]
+                    low += 1 # increase the index of smaller element
+            nums[low], nums[r] = nums[r], nums[low]
+            return low # pivot index
+
+        pos = partition(nums, 0, len(nums)-1)
+        if pos > len(nums) - k:
+            return self.findKthLargest(nums[:pos], k-(len(nums)-pos))
+        elif pos < len(nums) - k:
+            return self.findKthLargest(nums[pos+1:], k)
+        else: # pos == len(nums) - k, the index of kth largest element
+            return nums[pos]
+
+
+class Solution:
     def findKthLargest(self, nums: List[int], k: int) -> int:
         nums.sort()
         return nums[-k]

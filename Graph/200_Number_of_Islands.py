@@ -1,3 +1,23 @@
+class Solution:
+    def numIslands(self, grid: List[List[str]]) -> int:
+        def dfs(r, c):
+            if 0 <= r < R and 0 <= c < C and grid[r][c] == '1':
+                grid[r][c] = '0'
+                dfs(r-1, c)
+                dfs(r+1, c)
+                dfs(r, c-1)
+                dfs(r, c+1)
+
+        R = len(grid)
+        C = len(grid[0])
+        count = 0
+        for r in range(R):
+            for c in range(C):
+                if grid[r][c] == '1':
+                    count += 1
+                    dfs(r, c)
+        return count
+
 class Solution(object):
     def numIslands(self, grid):
         """
@@ -49,6 +69,7 @@ class Solution(object):
                     dfs(i, j)
                     count += 1
         return count
+
 class Solution:
     def numIslands(self, grid: List[List[str]]) -> int:
         if not grid:
